@@ -1,0 +1,24 @@
+.DS_Store
+node_modules/
+/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+yarn.lock
+selenium-debug.log
+package-lock.json
+*.css.map
+/.cache/
+/.sass-cache/
+# /static/js/vendor.dll.js
+# /build/vendor-manifest.json
+
+# Editor directories and files
+.idea
+.vscode
+.cache
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.history
