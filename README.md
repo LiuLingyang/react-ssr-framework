@@ -49,8 +49,9 @@ react-ssr-framework   -主工程目录
 |---dist    - 打包后文件路径
 |---node_modules    - node 依赖目录
 |---server  - 工程启动目录
-    |---dev.js    - 开发环境启动文件
-    |---build.js  - 生产环境启动文件
+    |---dev-server.js    - 开发环境配置文件
+    |---index.js         - 工程启动文件
+    |---renderer.js      - 服务端生成 html 配置文件
 |---src
     |---assets       - 静态资源目录
     |---components   - 业务通用组件

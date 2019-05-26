@@ -1,7 +1,7 @@
 import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import createStore from './redux/store';
+import createStore from './store';
 import { router } from './router';
 import Root from './App';
 

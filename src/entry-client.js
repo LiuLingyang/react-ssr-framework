@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { loadableReady } from '@loadable/component';
-import createStore from './redux/store';
+import createStore from './store';
 import Root from './App';
 
 const createApp = (Component) => {

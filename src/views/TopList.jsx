@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { NavLink } from 'react-router-dom';
-import { setClientLoad, fatchTopList } from '../redux/actions';
+import { setClientLoad, fatchTopList } from '../store/actions/actions';
 import ListItem from '../components/ListItem';
 import '../assets/top-list.scss';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { setClientLoad, fetchTopDetail } from '../redux/actions';
+import { setClientLoad, fetchTopDetail } from '../store/actions/actions';
 
 class TopDetail extends React.Component {
   componentDidMount() {
