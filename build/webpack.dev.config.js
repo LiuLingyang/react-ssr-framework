@@ -3,6 +3,7 @@ const utils = require('./utils');
 const webpack = require('webpack');
 const config = require('../config');
 const merge = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const baseWebpackConfig = require('./webpack.base.config');
 
 // add hot-reload related code to entry chunks
@@ -34,13 +35,16 @@ module.exports = merge(baseWebpackConfig, {
   module: {
     rules: [
       createLintingRule(),
-      ...utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
+      ...utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true, extract: true })
     ]
   },
   devtool: config.dev.devtool,
   plugins: [
     new webpack.DefinePlugin({
       'process.env': config.dev.env
+    }),
+    new MiniCssExtractPlugin({
+      filename: utils.assetsPath('css/[name].css')
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
