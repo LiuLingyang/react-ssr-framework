@@ -36,12 +36,6 @@ class App extends React.Component {
                 <h1>Not Found</h1>
               </div>
             </StatusRoute>
-            {/* <Route path="/bar" component={Bar} />
-            <Route path="/baz" component={Baz} />
-            <Route path="/foo" component={Foo} />
-            <Route path="/top-list" component={TopList} />
-            <Redirect from="/" to="/bar" exact />
-            */}
           </Switch>
         </div>
       </div>
