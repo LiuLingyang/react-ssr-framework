@@ -19,6 +19,7 @@ class App extends React.Component {
         <div className="title">This is a react ssr demo</div>
         <ul className="nav">
           <li><NavLink to="/bar">Bar</NavLink></li>
+          <li><NavLink to="/bar/child">Bar-child</NavLink></li>
           <li><NavLink to="/baz">Baz</NavLink></li>
           <li><NavLink to="/foo">Foo</NavLink></li>
           <li><NavLink to="/top-list">TopList</NavLink></li>

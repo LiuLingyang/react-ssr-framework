@@ -8,7 +8,7 @@ class Foo extends React.Component {
         <Helmet>
           <title>Foo</title>
         </Helmet>
-        <div>Foo2</div>
+        <div>Foo</div>
       </div>
     );
   }

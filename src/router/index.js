@@ -6,7 +6,13 @@ import { fatchTopList, fetchTopDetail } from '../store/actions/actions';
 const router = [
   {
     path: '/bar',
-    component: loadable(() => import('../views/Bar'))
+    component: loadable(() => import('../views/Bar')),
+    routes: [
+      {
+        path: '/bar/child',
+        component: loadable(() => import('../views/Child'))
+      }
+    ]
   },
   {
     path: '/baz',
