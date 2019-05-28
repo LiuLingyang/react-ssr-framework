@@ -39,6 +39,7 @@ module.exports = {
     "no-multi-spaces": "error",
     "object-curly-spacing": ["error", "always"],
     "quotes": ["error", 'single'],
-    "comma-dangle": ["error"]
+    "comma-dangle": ["error"],
+    "react/no-string-refs": 0
   }
 }

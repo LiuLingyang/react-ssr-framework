@@ -16,12 +16,8 @@ export function setTopDetail(topDetail) {
 export function fatchTopList() {
   // dispatch由thunkMiddleware传入
   return (dispatch) => {
-    return getTopList().then(response => {
-      const data = response.data;
-      if (data.code === 0) {
-        // 获取数据后dispatch，存入store
-        dispatch(setTopList(data.data.topList));
-      }
+    return getTopList().then(result => {
+      dispatch(setTopList(result.topList));
       if (process.env.NODE_ENV === 'server') {
         dispatch(setClientLoad(false));
       }
@@ -31,18 +27,15 @@ export function fatchTopList() {
 
 export function fetchTopDetail(id) {
   return (dispatch) => {
-    return getTopDetail(id).then(response => {
-      const data = response.data;
-      if (data.code === 0) {
-        const topinfo = data.topinfo;
-        const top = {
-          id: topinfo.topID,
-          name: topinfo.ListName,
-          pic: topinfo.pic,
-          info: topinfo.info
-        };
-        dispatch(setTopDetail(top));
-      }
+    return getTopDetail(id).then(result => {
+      const topinfo = result.topinfo;
+      const top = {
+        id: topinfo.topID,
+        name: topinfo.ListName,
+        pic: topinfo.pic,
+        info: topinfo.info
+      };
+      dispatch(setTopDetail(top));
       if (process.env.NODE_ENV === 'server') {
         dispatch(setClientLoad(false));
       }

@@ -1,15 +1,20 @@
-import axios from 'axios';
-import { BASEURL } from '@util/consts';
-
-const topListUrl = '/v8/fcg-bin/fcg_myqq_toplist.fcg';
-const topDetailUrl = '/v8/fcg-bin/fcg_v8_toplist_cp.fcg?&type=top';
+import axios from '@service/axios';
 
 function getTopList() {
-  return axios.get(`${BASEURL}${topListUrl}?format=json`);
+  return axios.get('/v8/fcg-bin/fcg_myqq_toplist.fcg', {
+    format: 'json'
+  });
 }
 
 function getTopDetail(id) {
-  return axios.get(`${BASEURL}${topDetailUrl}&topid=${id}&format=json`);
+  return axios.get('/v8/fcg-bin/fcg_v8_toplist_cp.fcg', {
+    type: 'top',
+    topid: id,
+    format: 'json'
+  },
+  {
+    raw: true
+  });
 }
 
 export {
