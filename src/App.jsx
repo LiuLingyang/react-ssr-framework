@@ -5,8 +5,8 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { router, NestedRoute, StatusRoute } from './router';
 import { setClientLoad } from '@store/actions/actions';
-import './assets/toastr.scss';
-import './assets/app.scss';
+import './assets/style/style.scss';
+import './App.scss';
 
 @connect(
   () => ({}),

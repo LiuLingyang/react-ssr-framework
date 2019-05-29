@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchTopList } from '../store/actions/actions';
 import ListItem from '../components/ListItem';
-import '../assets/top-list.scss';
+import './TopList.scss';
 
 @connect(
   state => ({
