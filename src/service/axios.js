@@ -2,6 +2,7 @@
  * raw: 将直接返回 response.data，否则返回 response.data.data
  */
 import axios from 'axios';
+import toastr from 'toastr';
 import { BASEURL } from '@util/consts';
 
 let axiosCache = axios.create({
@@ -14,7 +15,7 @@ axiosCache.interceptors.request.use(
     return config;
   },
   function (error) {
-    alert('网络异常，请稍后重试');
+    toastr.error('网络异常，请稍后重试');
     Promise.reject(error);
   }
 );
@@ -30,10 +31,10 @@ axiosCache.interceptors.response.use(
         location.href = '/login';
         break;
       case 2:
-        alert(errorMess);
+        toastr.error(errorMess);
         break;
       default:
-        alert ('网络异常，请稍后重试');
+        toastr.error ('网络异常，请稍后重试');
         break;
       }
       // 使pending，这样就不会走到resolve或者rejcet的逻辑了
@@ -46,7 +47,7 @@ axiosCache.interceptors.response.use(
     }
   },
   function (error) {
-    alert('网络异常，请稍后重试');
+    toastr.error('网络异常，请稍后重试');
     Promise.reject(error);
   }
 );
