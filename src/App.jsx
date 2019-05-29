@@ -1,14 +1,21 @@
 import React from 'react';
-import {
-  Switch,
-  Redirect,
-  NavLink
-} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Switch, Redirect, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { connect } from 'react-redux';
 import { router, NestedRoute, StatusRoute } from './router';
+import { setClientLoad } from '@store/actions/actions';
 import './assets/app.scss';
 
+@connect(
+  () => ({}),
+  { setClientLoad }
+)
 class App extends React.Component {
+  componentDidMount() {
+    // 客户端 setClientLoad 设置为 true
+    this.props.setClientLoad(true);
+  }
   render() {
     return (
       <div>
@@ -43,5 +50,9 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  setClientLoad: PropTypes.func
+};
 
 export default App;

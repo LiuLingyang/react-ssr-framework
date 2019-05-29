@@ -2,22 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
-import { setClientLoad, fetchTopDetail } from '../store/actions/actions';
+import { fetchTopDetail } from '../store/actions/actions';
 
 @connect(
   state => ({
     clientShouldLoad: state.clientShouldLoad,
     topDetail: state.topDetail
   }),
-  { fetchTopDetail, setClientLoad }
+  { fetchTopDetail }
 )
 class TopDetail extends React.Component {
   componentDidMount() {
     const id = this.props.match.params.id;
     if (this.props.clientShouldLoad === true) {
       this.props.fetchTopDetail(id);
-    } else {
-      this.props.setClientLoad(true);
     }
   }
   render() {
@@ -40,8 +38,7 @@ TopDetail.propTypes = {
   match: PropTypes.object,
   clientShouldLoad: PropTypes.bool,
   topDetail: PropTypes.object,
-  fetchTopDetail: PropTypes.func,
-  setClientLoad: PropTypes.func
+  fetchTopDetail: PropTypes.func
 };
 
 export default TopDetail;

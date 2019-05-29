@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 import * as ActionTypes from '../constants/actionTypes';
+import check from '../enhancers/check';
 
 const initialState = {
-  clientShouldLoad: true,
+  clientShouldLoad: !process.env.NODE_ENV === 'server',
   topList: [],
   topDetail: {}
 };
@@ -40,4 +41,4 @@ const reducer = combineReducers({
   topDetail
 });
 
-export default reducer;
+export default check(reducer);

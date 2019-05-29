@@ -17,9 +17,6 @@ export function fetchTopList() {
   return (dispatch) => {
     return getTopList().then(result => {
       dispatch(setTopList(result.topList));
-      if (process.env.NODE_ENV === 'server') {
-        dispatch(setClientLoad(false));
-      }
     });
   };
 }
@@ -35,9 +32,6 @@ export function fetchTopDetail(id) {
         info: topinfo.info
       };
       dispatch(setTopDetail(top));
-      if (process.env.NODE_ENV === 'server') {
-        dispatch(setClientLoad(false));
-      }
     });
   };
 }
