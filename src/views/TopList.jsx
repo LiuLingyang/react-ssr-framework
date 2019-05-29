@@ -2,18 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { NavLink } from 'react-router-dom';
-import { setClientLoad, fatchTopList } from '../store/actions/actions';
+import { connect } from 'react-redux';
+import { setClientLoad, fetchTopList } from '../store/actions/actions';
 import ListItem from '../components/ListItem';
 import '../assets/top-list.scss';
 
+@connect(
+  state => ({
+    clientShouldLoad: state.clientShouldLoad,
+    topList: state.topList
+  }),
+  { fetchTopList, setClientLoad }
+)
 class TopList extends React.Component {
   componentDidMount() {
     // 判断是否需要加载数据
     if (this.props.clientShouldLoad === true) {
-      this.props.dispatch(fatchTopList());
+      this.props.fetchTopList();
     } else {
       // 客户端执行后，将客户端是否加载数据设置为true
-      this.props.dispatch(setClientLoad(true));
+      this.props.setClientLoad(true);
     }
   }
   render() {
@@ -40,8 +48,9 @@ class TopList extends React.Component {
 TopList.propTypes = {
   match: PropTypes.object,
   clientShouldLoad: PropTypes.bool,
-  dispatch: PropTypes.func,
-  topList: PropTypes.array
+  topList: PropTypes.array,
+  fetchTopList: PropTypes.func,
+  setClientLoad: PropTypes.func
 };
 
 export default TopList;

@@ -13,8 +13,7 @@ export function setTopDetail(topDetail) {
   return { type: SET_TOP_DETAIL, topDetail };
 }
 
-export function fatchTopList() {
-  // dispatch由thunkMiddleware传入
+export function fetchTopList() {
   return (dispatch) => {
     return getTopList().then(result => {
       dispatch(setTopList(result.topList));
