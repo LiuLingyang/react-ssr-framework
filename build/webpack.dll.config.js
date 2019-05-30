@@ -5,7 +5,7 @@ module.exports = {
   mode: 'production',
   devtool: false,
   entry: {
-    vendor: ['axios', 'babel-polyfill', 'lodash', 'react', 'react-dom', 'react-redux', 'redux', 'redux-thunk']
+    vendor: ['axios', 'lodash', 'react', 'react-dom', 'react-redux', 'redux', 'redux-thunk', 'react-helmet', 'react-router-dom', 'toastr']
   },
   output: {
     path: path.join(__dirname, '../static/js'), // 打包后文件输出的位置
@@ -33,5 +33,8 @@ module.exports = {
       name: '[name]_library',
       context: path.join(__dirname, '..')
     })
-  ]
+  ],
+  performance: {
+    hints: false
+  }
 };

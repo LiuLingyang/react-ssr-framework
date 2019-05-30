@@ -18,6 +18,7 @@
   "dependencies": {
     "@loadable/component": "^5.10.1",
     "axios": "^0.18.0",
+    "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
