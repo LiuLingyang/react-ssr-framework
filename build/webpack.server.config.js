@@ -26,6 +26,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
+      '@shared': utils.resolve('shared'),
       '@src': utils.resolve('src'),
       '@components': utils.resolve('src/components'),
       '@service': utils.resolve('src/service'),

@@ -3,7 +3,7 @@
  */
 import axios from 'axios';
 import toastr from 'toastr';
-import { BASEURL } from '@util/consts';
+import { BASEURL } from '@shared/consts';
 
 let axiosCache = axios.create({
   timeout: 10000
@@ -25,24 +25,25 @@ axiosCache.interceptors.response.use(
     let data = response.data.data;
     let ecode = response.data.code;
     let errorMess = response.data.message;
+    // 返回全量数据
+    if (response.config.raw) {
+      return response.data;
+    }
     if (ecode !== 0) {
       switch (ecode) {
-      case 1: // 未登录
-        location.href = '/login';
-        break;
-      case 2:
-        toastr.error(errorMess);
-        break;
-      default:
-        toastr.error ('网络异常，请稍后重试');
-        break;
+        case 1: // 未登录
+          location.href = '/login';
+          break;
+        case 2:
+          toastr.error(errorMess);
+          break;
+        default:
+          toastr.error ('网络异常，请稍后重试');
+          break;
       }
       // 使pending，这样就不会走到resolve或者rejcet的逻辑了
       return new Promise(() => {});
     } else {
-      if (response.config.raw) {
-        return response.data;
-      }
       return data;
     }
   },

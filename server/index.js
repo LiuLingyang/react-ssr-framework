@@ -5,13 +5,14 @@ const fs = require('fs');
 const express = require('express');
 const proxy = require('express-http-proxy');
 const ServerRenderer = require('./renderer');
+const { BASEURL } = require('../shared/consts');
 const app = express();
 
 // 静态资源映射到dist路径下
 app.use(express.static('dist'));
 
 // Node Api 代理功能实现代码
-app.use('/v8', proxy('https://c.y.qq.com/', {
+app.use('/v8', proxy(BASEURL, {
   proxyReqPathResolver: function (req) {
     return `${req.baseUrl}/${req.url}`;
   }

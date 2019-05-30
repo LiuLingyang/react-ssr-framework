@@ -29,7 +29,7 @@ module.exports = {
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
     "semi": ["error", "always"],
-    "indent": ["error", 2],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
     "keyword-spacing": "error",
     "space-before-blocks": "error",
     "no-trailing-spaces": "error",
