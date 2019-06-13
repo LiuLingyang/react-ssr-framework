@@ -18,7 +18,7 @@ class TopList extends React.Component {
   componentDidMount() {
     // 判断是否需要加载数据
     if (this.props.clientShouldLoad === true) {
-      this.props.fetchTopList();
+      this.props.fetchTopList({});
     }
   }
   render() {

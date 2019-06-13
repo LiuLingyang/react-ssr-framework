@@ -4,12 +4,16 @@ const chalk = require('chalk');
 const fs = require('fs');
 const express = require('express');
 const proxy = require('express-http-proxy');
+const cookieParser = require('cookie-parser');
 const ServerRenderer = require('./renderer');
 const { BASEURL } = require('../shared/consts');
 const app = express();
 
 // 静态资源映射到dist路径下
 app.use(express.static('dist'));
+
+// 解析 cookie
+app.use(cookieParser());
 
 // Node Api 代理功能实现代码
 app.use('/v8', proxy(BASEURL, {
@@ -57,7 +61,8 @@ app.get('*', isProd ? render : (req, res) => {
 
 const port = process.env.PORT || config.dev.port;
 const autoOpenBrowser = !!config.dev.autoOpenBrowser;
-const uri = 'http://localhost:' + port;
+const host = config.dev.host;
+const uri = 'http://' + host + ':' + port;
 const ip = 'http://' + require('ip').address() + ':' + port;
 
 app.listen(port, function (err) {

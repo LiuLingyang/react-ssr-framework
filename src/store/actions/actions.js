@@ -13,17 +13,17 @@ export function setTopDetail(topDetail) {
   return { type: SET_TOP_DETAIL, topDetail };
 }
 
-export function fetchTopList() {
+export function fetchTopList(data) {
   return (dispatch) => {
-    return getTopList().then(result => {
+    return getTopList(data).then(result => {
       dispatch(setTopList(result.topList));
     });
   };
 }
 
-export function fetchTopDetail(id) {
+export function fetchTopDetail(data) {
   return (dispatch) => {
-    return getTopDetail(id).then(result => {
+    return getTopDetail(data).then(result => {
       const topinfo = result.topinfo;
       const top = {
         id: topinfo.topID,

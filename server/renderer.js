@@ -61,8 +61,8 @@ class ServerRenderer {
       let matchs = matchRoutes(router, request.path);
       promises = matchs.map(({ route, match }) => {
         const loadData = route.loadData;
-        // match.params获取匹配的路由参数
-        return loadData ? loadData(store, Object.assign(match.params, request.query)) : Promise.resolve(null);
+        // 携带上cookie，合并到 params 中，axios 中处理
+        return loadData ? loadData(store, Object.assign(match.params, request.query, { cookies: request.cookies })) : Promise.resolve(null);
       });
 
       // resolve所有loadData

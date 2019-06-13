@@ -1,16 +1,18 @@
 import axios from '@service/axios';
 
-function getTopList() {
+function getTopList({ cookies }) {
   return axios.get('/v8/fcg-bin/fcg_myqq_toplist.fcg', {
-    format: 'json'
+    format: 'json',
+    cookies
   });
 }
 
-function getTopDetail(id) {
+function getTopDetail({ id, cookies }) {
   return axios.get('/v8/fcg-bin/fcg_v8_toplist_cp.fcg', {
     type: 'top',
     topid: id,
-    format: 'json'
+    format: 'json',
+    cookies
   },
   {
     raw: true

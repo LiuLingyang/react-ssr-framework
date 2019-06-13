@@ -26,15 +26,15 @@ const router = [
     path: '/top-list',
     component: loadable(() => import('../views/TopList')),
     exact: true,
-    loadData(store) {
-      return store.dispatch(fetchTopList());
+    loadData(store, params) {
+      return store.dispatch(fetchTopList(params));
     }
   },
   {
     path: '/top-list/:id',
     component: loadable(() => import('../views/TopDetail')),
     loadData(store, params) {
-      return store.dispatch(fetchTopDetail(params.id));
+      return store.dispatch(fetchTopDetail(params));
     }
   }
 ];

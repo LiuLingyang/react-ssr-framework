@@ -15,7 +15,7 @@ class TopDetail extends React.Component {
   componentDidMount() {
     const id = this.props.match.params.id;
     if (this.props.clientShouldLoad === true) {
-      this.props.fetchTopDetail(id);
+      this.props.fetchTopDetail({ id });
     }
   }
   render() {

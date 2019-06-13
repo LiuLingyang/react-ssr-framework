@@ -5,7 +5,16 @@ import axios from 'axios';
 import toastr from 'toastr';
 import { BASEURL } from '@shared/consts';
 
+const parseCookie = cookies => {
+  let cookie = '';
+  Object.keys(cookies).forEach(item => {
+    cookie+= item + '=' + cookies[item] + '; ';
+  });
+  return cookie;
+};
+
 let axiosCache = axios.create({
+  withCredentials: true,
   timeout: 10000
 });
 
@@ -59,6 +68,17 @@ const cache = {
       // 服务端接口需要加上 baseurl
       if (process.env.NODE_ENV === 'server') {
         url = `${BASEURL}${url}`;
+      }
+      // 处理 cookie
+      let cookies;
+      if (data.cookies) {
+        cookies = data.cookies;
+        delete data.cookies;
+        opts = Object.assign(opts, {
+          headers: {
+            Cookie: parseCookie(cookies)
+          }
+        });
       }
 
       return axiosCache[method](url, {
