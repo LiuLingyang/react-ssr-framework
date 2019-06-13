@@ -28,9 +28,8 @@ npm run start
 ```
 
 # 规范
-- 缩进采用2个空格，不允许使用 tab 字符
+- 缩进采用 2 个空格，不允许使用 tab 字符
 - 不允许提交包含 eslint 错误的代码
-- 基于 Gitflow 的分支管理规范
 - 避免使用 componentWillMount componentWillUpdate componentWillReceiveProps
 
 
@@ -52,6 +51,7 @@ react-ssr-framework   -主工程目录
     |---dev-server.js    - 开发环境配置文件
     |---index.js         - 工程启动文件
     |---renderer.js      - 服务端生成 html 配置文件
+|---shared          - 客户端、服务端共享资源
 |---src
     |---assets       - 静态资源目录
     |---components   - 业务通用组件
