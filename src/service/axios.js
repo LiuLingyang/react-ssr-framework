@@ -74,10 +74,13 @@ const cache = {
       if (data.cookies) {
         cookies = data.cookies;
         delete data.cookies;
+
+        let headers = {};
+        headers = Object.assign(headers, opts.headers, {
+          Cookie: parseCookie(cookies)
+        });
         opts = Object.assign(opts, {
-          headers: {
-            Cookie: parseCookie(cookies)
-          }
+          headers
         });
       }
 
