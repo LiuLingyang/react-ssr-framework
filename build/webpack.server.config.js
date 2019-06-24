@@ -27,8 +27,8 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
       '@shared': utils.resolve('shared'),
-      '@assets': utils.resolve('assets'),
       '@src': utils.resolve('src'),
+      '@assets': utils.resolve('src/assets'),
       '@components': utils.resolve('src/components'),
       '@service': utils.resolve('src/service'),
       '@util': utils.resolve('src/util'),
