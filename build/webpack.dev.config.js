@@ -35,7 +35,7 @@ module.exports = merge(baseWebpackConfig, {
   module: {
     rules: [
       createLintingRule(),
-      ...utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true, extract: true })
+      ...utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true, extract: false })
     ]
   },
   devtool: config.dev.devtool,
