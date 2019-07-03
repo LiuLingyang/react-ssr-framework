@@ -48,6 +48,7 @@ module.exports = {
               plugins: [
                 'dynamic-import-node',
                 '@loadable/babel-plugin',
+                '@babel/plugin-transform-runtime',
                 ['@babel/plugin-proposal-decorators', { 'legacy': true }]
               ]
             }
