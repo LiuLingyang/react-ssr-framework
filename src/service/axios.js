@@ -84,10 +84,27 @@ const cache = {
         });
       }
 
-      return axiosCache[method](url, {
-        ...opts,
-        params: data
-      });
+      // 处理 url
+      url = url
+        .split('/')
+        .map(item => {
+          const [empty, name] = item.split(':');
+          if (!empty && data[name]) {
+            const value = data[name];
+            delete data[name];
+            return value;
+          }
+          return item;
+        }).join('/');
+
+      if (method === 'get' || method === 'delete') {
+        return axiosCache[method](url, {
+          ...opts,
+          params: data
+        });
+      }
+
+      return axiosCache[method](url, data, opts);
     };
   }
 };
