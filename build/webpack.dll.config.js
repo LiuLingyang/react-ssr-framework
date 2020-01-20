@@ -1,14 +1,17 @@
 const path = require('path');
 const webpack = require('webpack');
+const pkg = require('../package.json');
 
 module.exports = {
   mode: 'production',
   devtool: false,
   entry: {
-    vendor: ['axios', 'lodash', 'react', 'react-dom', 'react-redux', 'redux', 'redux-thunk', 'react-helmet', 'react-router-dom', 'toastr']
+    vendor: Object.keys(pkg.dependencies).filter(
+      dependency => !['@loadable/server', '@loadable/component'].includes(dependency)
+    )
   },
   output: {
-    path: path.join(__dirname, '../static/js'), // 打包后文件输出的位置
+    path: path.join(__dirname, '../static/js/'), // 打包后文件输出的位置
     filename: '[name].dll.js',
     /**
      * output.library
@@ -17,6 +20,7 @@ module.exports = {
      */
     library: '[name]_library'
   },
+  module: {},
   plugins: [
     new webpack.DllPlugin({
       /**
@@ -33,6 +37,9 @@ module.exports = {
       name: '[name]_library',
       context: path.join(__dirname, '..')
     })
+    // new MiniCssExtractPlugin({
+    //   filename: '[name].css',
+    // })
   ],
   performance: {
     hints: false

@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
   dev: {
-    env: require('./dev.env'),
+    env: require('./client.dev'),
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
@@ -37,7 +37,7 @@ module.exports = {
   },
 
   build: {
-    env: require('./prod.env'),
+    env: require('./client.prod'),
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
@@ -61,15 +61,17 @@ module.exports = {
     bundleAnalyzerReport: process.env.npm_config_report
   },
 
-  server: {
-    env: require('./server.env'),
-    productionSourceMap: false,
-    devtool: 'source-map'
-  },
-
   test: {
-    env: require('./test.env'),
+    env: require('./client.test'),
     productionSourceMap: true,
     devtool: 'cheap-module-eval-source-map'
+  },
+
+  server: {
+    dev: require('./server.dev'),
+    test: require('./server.test'),
+    prod: require('./server.prod'),
+    productionSourceMap: false,
+    devtool: 'source-map'
   }
 };

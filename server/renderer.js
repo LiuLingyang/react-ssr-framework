@@ -29,21 +29,18 @@ class ServerRenderer {
           stats: this.stats,
           entrypoints: ['app'] // 入口entry
         });
-        let root = ReactDOMServer.renderToString(
-          React.createElement(
-            ChunkExtractorManager,
-            { extractor },
-            component)
-        );
+        let root = ReactDOMServer.renderToString(React.createElement(ChunkExtractorManager, { extractor }, component));
 
-        if (context.url) { // 当发生重定向时，静态路由会设置url
+        if (context.url) {
+          // 当发生重定向时，静态路由会设置url
           resolve({
             error: { url: context.url }
           });
           return;
         }
 
-        if (context.statusCode) { // 有statusCode字段表示路由匹配失败
+        if (context.statusCode) {
+          // 有statusCode字段表示路由匹配失败
           resolve({
             error: { code: context.statusCode }
           });
@@ -62,16 +59,20 @@ class ServerRenderer {
       promises = matchs.map(({ route, match }) => {
         const loadData = route.loadData;
         // 携带上cookie，合并到 params 中，axios 中处理
-        return loadData ? loadData(store, Object.assign(match.params, request.query, { cookies: request.cookies })) : Promise.resolve(null);
+        return loadData
+          ? loadData(store, Object.assign(match.params, request.query, { cookies: request.cookies }))
+          : Promise.resolve(null);
       });
 
       // resolve所有loadData
-      Promise.all(promises).then(() => {
-        // 异步数据请求完成后进行render
-        render();
-      }).catch(error => {
-        reject(error);
-      });
+      Promise.all(promises)
+        .then(() => {
+          // 异步数据请求完成后进行render
+          render();
+        })
+        .catch(error => {
+          reject(error);
+        });
     });
   }
   _createEntry(bundle) {
@@ -94,12 +95,14 @@ class ServerRenderer {
     // 替换注释节点为渲染后的html字符串
     return this.template
       .replace(/<title>.*<\/title>/, `${head.title.toString()}`)
-      .replace('<!--react-ssr-head-->',
+      .replace(
+        '<!--react-ssr-head-->',
         `${head.meta.toString()}\n${head.link.toString()}${extractor.getLinkTags()}\n${extractor.getStyleTags()}
         <script type="text/javascript">
           window.__INITIAL_STATE__ = ${JSON.stringify(initalState)}
         </script>
-      `)
+      `
+      )
       .replace('<!--react-ssr-outlet-->', `<div id="app">${root}</div>\n${extractor.getScriptTags()}`);
   }
 }

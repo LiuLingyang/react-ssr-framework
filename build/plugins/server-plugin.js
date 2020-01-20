@@ -2,9 +2,12 @@ const { isJS, onEmit, validateConfig } = require('./util');
 
 module.exports = class SSRServerPlugin {
   constructor(opts = {}) {
-    this.options = Object.assign({
-      filename: 'server-bundle.json'
-    }, opts);
+    this.options = Object.assign(
+      {
+        filename: 'server-bundle.json'
+      },
+      opts
+    );
   }
   apply(compiler) {
     validateConfig(compiler);
@@ -13,9 +16,7 @@ module.exports = class SSRServerPlugin {
       const stats = compilation.getStats().toJson();
 
       if (Object.keys(stats.entrypoints).length > 1) {
-        throw new Error(
-          'Server-side bundle should have one single entry file. '
-        );
+        throw new Error('Server-side bundle should have one single entry file. ');
       }
 
       const entryName = Object.keys(stats.entrypoints)[0];
@@ -47,7 +48,7 @@ module.exports = class SSRServerPlugin {
       if (Object.keys(bundle.files).length > 1) {
         throw new Error(
           'Server-side bundle should output one single file. ' +
-          'If you are using code splitting, you should use `dynamic-import-node` babel plugin. '
+            'If you are using code splitting, you should use `dynamic-import-node` babel plugin. '
         );
       }
 

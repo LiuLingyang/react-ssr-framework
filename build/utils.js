@@ -3,7 +3,7 @@ const config = require('../config');
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-exports.resolve = function (dir) {
+exports.resolve = function(dir) {
   return path.join(__dirname, '..', dir);
 };
 
@@ -19,14 +19,16 @@ const cssLoaders = function(options) {
 
   const cssLoader = {
     loader: 'css-loader',
-    options: !options.modules ? {
-      sourceMap: options.sourceMap
-    } : {
-      sourceMap: options.sourceMap,
-      camelCase: true,
-      modules: true,
-      localIdentName: '[name]_[local]-[hash:base64:5]'
-    }
+    options: !options.modules
+      ? {
+          sourceMap: options.sourceMap
+        }
+      : {
+          sourceMap: options.sourceMap,
+          camelCase: true,
+          modules: true,
+          localIdentName: '[name]_[local]-[hash:base64:5]'
+        }
   };
 
   const postcssLoader = {
@@ -49,7 +51,7 @@ const cssLoaders = function(options) {
     }
   };
 
-  function generateLoaders (loader, loaderOptions) {
+  function generateLoaders(loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader, scssLoader] : [cssLoader];
 
     if (loader) {
@@ -81,7 +83,7 @@ const cssLoaders = function(options) {
   };
 };
 
-exports.styleLoaders = function (options) {
+exports.styleLoaders = function(options) {
   const output = [];
   const loaders = cssLoaders(options);
 
@@ -108,10 +110,9 @@ exports.styleLoaders = function (options) {
   return output;
 };
 
-exports.assetsPath = function (_path) {
-  const assetsSubDirectory = process.env.NODE_ENV === 'production'
-    ? config.build.assetsSubDirectory
-    : config.dev.assetsSubDirectory;
+exports.assetsPath = function(_path) {
+  const assetsSubDirectory =
+    process.env.NODE_ENV === 'production' ? config.build.assetsSubDirectory : config.dev.assetsSubDirectory;
 
   return path.posix.join(assetsSubDirectory, _path);
 };

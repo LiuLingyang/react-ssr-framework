@@ -1,14 +1,16 @@
 const path = require('path');
 const webpack = require('webpack');
 const MFS = require('memory-fs');
-const clientConfig = require('../build/webpack.dev.config');
-const serverConfig = require('../build/webpack.server.config');
+const clientConfig = require('../build/webpack.client.dev.config');
+const serverConfig = require('../build/webpack.server.dev.config');
 
 module.exports = function setupDevServer(app, callback) {
   let bundle;
   let loadableStats;
   let resolve;
-  const readyPromise = new Promise(r => { resolve = r; });
+  const readyPromise = new Promise(r => {
+    resolve = r;
+  });
   const update = () => {
     if (bundle && loadableStats) {
       callback(bundle, loadableStats);

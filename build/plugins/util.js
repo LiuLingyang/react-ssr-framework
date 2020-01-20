@@ -1,12 +1,12 @@
 const { red } = require('chalk');
 
-const isJS = (file) => /\.js(\?[^.]+)?$/.test(file);
+const isJS = file => /\.js(\?[^.]+)?$/.test(file);
 
 const onEmit = (compiler, name, hook) => {
   compiler.hooks.emit.tapAsync(name, hook);
 };
 
-const validateConfig = (compiler) => {
+const validateConfig = compiler => {
   const prefix = 'ssr-server-plugin';
   if (compiler.options.target !== 'node') {
     let msg = 'webpack config `target` should be "node".';

@@ -16,13 +16,16 @@ app.use(express.static('dist'));
 app.use(cookieParser());
 
 // Node Api 代理功能实现代码
-app.use('/v8', proxy(BASEURL, {
-  proxyReqPathResolver: function (req) {
-    return `${req.baseUrl}/${req.url}`;
-  }
-}));
+app.use(
+  '/v8',
+  proxy(BASEURL, {
+    proxyReqPathResolver: function(req) {
+      return `${req.baseUrl}/${req.url}`;
+    }
+  })
+);
 
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'testing';
 let renderer;
 let readyPromise;
 let template = fs.readFileSync('./index.html', 'utf-8');
@@ -39,25 +42,33 @@ if (isProd) {
 const render = (req, res) => {
   console.log(chalk.cyan('visit url: ' + req.url));
 
-  renderer.renderToString(req).then(({ error, html }) => {
-    if (error) {
-      if (error.url) {
-        res.redirect(error.url);
-      } else if (error.code) {
-        res.status(error.code).send('error code：' + error.code);
+  renderer
+    .renderToString(req)
+    .then(({ error, html }) => {
+      if (error) {
+        if (error.url) {
+          res.redirect(error.url);
+        } else if (error.code) {
+          res.status(error.code).send('error code：' + error.code);
+        }
       }
-    }
-    res.send(html);
-  }).catch(error => {
-    console.log(error);
-    res.status(500).send('Internal server error');
-  });
+      res.send(html);
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).send('Internal server error');
+    });
 };
 
-app.get('*', isProd ? render : (req, res) => {
-  // 等待客户端和服务端打包完成后进行render
-  readyPromise.then(() => render(req, res));
-});
+app.get(
+  '*',
+  isProd
+    ? render
+    : (req, res) => {
+        // 等待客户端和服务端打包完成后进行render
+        readyPromise.then(() => render(req, res));
+      }
+);
 
 const port = process.env.PORT || config.dev.port;
 const autoOpenBrowser = !!config.dev.autoOpenBrowser;
@@ -65,7 +76,7 @@ const host = config.dev.host;
 const uri = 'http://' + host + ':' + port;
 const ip = 'http://' + require('ip').address() + ':' + port;
 
-app.listen(port, function (err) {
+app.listen(port, function(err) {
   if (err) {
     console.log(err);
     return;

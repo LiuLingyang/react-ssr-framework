@@ -1,45 +1,59 @@
-// https://eslint.org/docs/user-guide/configuring
-
 module.exports = {
-  root: true,
   env: {
-    es6: true,
     browser: true,
+    es6: true,
     node: true
   },
   extends: [
-    "eslint:recommended",
-    "plugin:react/recommended"
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:prettier/recommended',
+    'prettier/flowtype',
+    'prettier/react',
+    'prettier/standard'
   ],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly'
+  },
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true
+    },
+    ecmaVersion: 2018,
+    sourceType: 'module'
+  },
+  plugins: ['@typescript-eslint', 'prettier', 'react'],
+  rules: {
+    'prettier/prettier': 'error',
+    'react/jsx-no-undef': [
+      2,
+      {
+        allowGlobals: true
+      }
+    ],
+    'no-unused-vars': ['off'],
+    'no-undef': ['off'],
+    'no-case-declarations': ['off'],
+    'no-empty': ['off'],
+    'react/display-name': ['off'],
+    'react/prop-types': ['off'],
+    'no-useless-escape': ['off'],
+    'no-console': ['off']
+  },
   settings: {
     react: {
-      version: "detect"
-    },
-  },
-  parser: "babel-eslint",
-  parserOptions: {
-    sourceType: "module",
-    ecmaFeatures: {
-      jsx: true,
-      legacyDecorators: true
+      pragma: 'React', // Pragma to use, default to "React"
+      version: 'detect' // React version. "detect" automatically picks the version you have installed.
     }
   },
-  rules: {
-    "generator-star-spacing": "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
-    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
-    "semi": ["error", "always"],
-    "indent": ["error", 2, { "SwitchCase": 1 }],
-    "keyword-spacing": "error",
-    "space-before-blocks": "error",
-    "no-trailing-spaces": "error",
-    "comma-spacing": "error",
-    "key-spacing": "error",
-    "spaced-comment": "error",
-    "no-multi-spaces": "error",
-    "object-curly-spacing": ["error", "always"],
-    "quotes": ["error", 'single'],
-    "comma-dangle": ["error"],
-    "react/no-string-refs": 0
-  }
-}
+  overrides: [
+    {
+      files: ['src/**/*.js'],
+      parser: 'babel-eslint',
+      rules: {}
+    }
+  ]
+};
